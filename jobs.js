@@ -9,9 +9,7 @@ const SITE = {
   name: "Careers Flow",
   email: "careersflows@gmail.com",
   linkedin: "https://www.linkedin.com/company/careers-flow",
-  // Form endpoint for apply.html (Formspree/Getform/your own backend).
-  // Leave "" to use the Tally fallback link below.
-  formEndpoint: "",
+  formEndpoint: "https://formspree.io/f/xvkzrpll",
   tallyUrl: "https://tally.so/r/your-form-id",
   responseTime: "7 working days"
 };
