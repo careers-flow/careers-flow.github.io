@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Job Details | Careers Flow</title>
+  <meta name="description" content="Role details and a quick fit check on Careers Flow.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } };</script>
+</head>
+<body class="font-sans text-slate-700 bg-slate-50 antialiased">
+
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-slate-900 text-lg">
+        <span class="inline-flex w-8 h-8 rounded-lg bg-emerald-500 text-white items-center justify-center text-sm">CF</span> Careers Flow
+      </a>
+      <a href="index.html#jobs" class="text-sm font-semibold text-slate-600 hover:text-emerald-600">← All roles</a>
+    </div>
+  </header>
+
+  <main id="app" class="max-w-6xl mx-auto px-5 py-10"></main>
+
+  <!-- Mobile sticky apply bar -->
+  <div id="mobileBar" class="hidden fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 p-3 lg:hidden">
+    <a id="mobileApply" href="#" class="block text-center bg-emerald-500 text-slate-900 font-bold py-3 rounded-lg">Apply for this role</a>
+  </div>
+
+  <script src="jobs.js"></script>
+  <script>
+    const app = document.getElementById("app");
+    const job = findJob(getParam("id"));
+
+    function section(title, items, bullet) {
+      const wrap = el("section", "bg-white rounded-2xl border border-slate-200 p-6");
+      wrap.appendChild(el("h2", "font-bold text-slate-900 text-lg", title));
+      const ul = el("ul", "mt-3 space-y-2");
+      items.forEach(t => {
+        const li = el("li", "flex gap-3");
+        li.append(el("span", "text-emerald-500 font-bold", bullet || "•"), el("span", "", t));
+        ul.appendChild(li);
+      });
+      wrap.appendChild(ul);
+      return wrap;
+    }
+
+    if (!job) {
+      app.append(el("h1", "text-2xl font-bold text-slate-900", "Role not found"));
+      const p = el("p", "mt-2", "This role may have closed. ");
+      const a = el("a", "text-emerald-600 font-semibold", "See current open roles");
+      a.href = "index.html#jobs"; p.appendChild(a);
+      app.appendChild(p);
+    } else {
+      document.title = job.title + " | Careers Flow";
+      const applyUrl = "apply.html?job=" + encodeURIComponent(job.id);
+      document.getElementById("mobileApply").href = applyUrl;
+      document.getElementById("mobileBar").classList.remove("hidden");
+      app.classList.add("pb-24", "lg:pb-10");
+
+      const grid = el("div", "grid lg:grid-cols-3 gap-8");
+      const main = el("div", "lg:col-span-2 space-y-6");
+
+      // Header card
+      const head = el("div", "bg-white rounded-2xl border border-slate-200 p-7");
+      head.append(
+        el("p", "text-xs font-semibold text-emerald-700 uppercase tracking-wide", job.industry),
+        el("h1", "mt-2 text-3xl font-extrabold text-slate-900 leading-tight", job.title),
+        el("p", "mt-1 text-slate-500", job.company)
+      );
+      const tags = el("div", "mt-5 flex flex-wrap gap-2 text-sm font-medium");
+      ["📍 " + job.location, "🕒 " + job.type, "📈 " + job.level, "💼 " + job.experience, "💰 " + job.salary]
+        .forEach(t => tags.appendChild(el("span", "bg-slate-100 rounded-full px-3 py-1", t)));
+      head.appendChild(tags);
+      const left = daysLeft(job.deadline);
+      head.appendChild(el("p", "mt-4 text-sm text-slate-500",
+        "Posted " + fmtDate(job.posted) + " · Apply by " + fmtDate(job.deadline) +
+        (left > 0 ? " (" + left + " day" + (left === 1 ? "" : "s") + " left)" : "")));
+      head.appendChild(el("p", "mt-5 text-slate-700", job.summary));
+      main.appendChild(head);
+
+      // Tabs
+      const tabs = el("div", "bg-white rounded-2xl border border-slate-200 p-2 flex gap-2 overflow-x-auto");
+      const panels = el("div", "space-y-6");
+      const defs = [
+        ["Responsibilities", () => [section("Key responsibilities", job.responsibilities, "▸")]],
+        ["Requirements", () => {
+          const out = [section("Requirements", job.requirements, "✔")];
+          if (job.niceToHave.length) out.push(section("Nice to have", job.niceToHave, "+"));
+          return out;
+        }],
+        ["Benefits", () => [section("What the employer offers", job.benefits, "★")]],
+        ["Hiring process", () => {
+          const s = section("How the process works", job.process, "→");
+          s.appendChild(el("p", "mt-4 text-xs text-slate-500", "Careers Flow screens and forwards profiles. All final decisions rest with the employer."));
+          return [s];
+        }]
+      ];
+      let current = 0;
+      function showTab(i) {
+        current = i;
+        tabs.replaceChildren();
+        defs.forEach(([name], idx) => {
+          const b = el("button", "px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap " +
+            (idx === i ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"), name);
+          b.addEventListener("click", () => showTab(idx));
+          tabs.appendChild(b);
+        });
+        panels.replaceChildren(...defs[i][1]());
+      }
+      showTab(0);
+      main.append(tabs, panels);
+
+      // Sidebar
+      const side = el("aside", "space-y-6 lg:sticky lg:top-6 self-start");
+
+      const apply = el("div", "bg-white rounded-2xl border border-slate-200 p-6");
+      apply.append(
+        el("h2", "font-bold text-slate-900 text-lg", "Interested in this role?"),
+        el("p", "mt-1 text-sm text-slate-500", "Takes about 3 minutes. Free for candidates.")
+      );
+      const applyBtn = el("a", "mt-4 block text-center bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold py-3 rounded-lg", "Apply for this role");
+      applyBtn.href = applyUrl;
+      apply.appendChild(applyBtn);
+
+      // Quick fit check
+      const fit = el("div", "bg-white rounded-2xl border border-slate-200 p-6");
+      fit.append(el("h2", "font-bold text-slate-900 text-lg", "Quick fit check"),
+                 el("p", "mt-1 text-sm text-slate-500", "Tick what applies to you. Nothing is saved or sent."));
+      const checks = el("div", "mt-4 space-y-3");
+      const boxes = [];
+      job.requirements.forEach(r => {
+        const label = el("label", "flex gap-3 text-sm cursor-pointer");
+        const cb = el("input", "mt-1 accent-emerald-600");
+        cb.type = "checkbox";
+        boxes.push(cb);
+        label.append(cb, el("span", "", r));
+        checks.appendChild(label);
+      });
+      const bar = el("div", "mt-5 h-2 rounded-full bg-slate-100 overflow-hidden");
+      const fill = el("div", "h-full bg-emerald-500 transition-all");
+      fill.style.width = "0%";
+      bar.appendChild(fill);
+      const msg = el("p", "mt-3 text-sm font-semibold text-slate-700", "Tick the requirements you meet.");
+      function updateFit() {
+        const n = boxes.filter(b => b.checked).length;
+        const pct = Math.round(n / boxes.length * 100);
+        fill.style.width = pct + "%";
+        msg.textContent = pct >= 80 ? pct + "% match — you look like a strong fit. Apply now."
+          : pct >= 50 ? pct + "% match — a reasonable fit. Your experience may still stand out."
+          : n === 0 ? "Tick the requirements you meet."
+          : pct + "% match — you may be early for this role, but you can still apply.";
+      }
+      boxes.forEach(b => b.addEventListener("change", updateFit));
+      fit.append(checks, bar, msg);
+
+      // Share
+      const share = el("div", "bg-white rounded-2xl border border-slate-200 p-6");
+      share.appendChild(el("h2", "font-bold text-slate-900 text-lg", "Share this role"));
+      const row = el("div", "mt-3 flex flex-wrap gap-2 text-sm font-semibold");
+      const url = location.href;
+      const li = el("a", "px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200", "LinkedIn");
+      li.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(url);
+      li.target = "_blank"; li.rel = "noopener";
+      const wa = el("a", "px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200", "WhatsApp");
+      wa.href = "https://wa.me/?text=" + encodeURIComponent(job.title + " — " + url);
+      wa.target = "_blank"; wa.rel = "noopener";
+      const copy = el("button", "px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200", "Copy link");
+      copy.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(url); copy.textContent = "Copied ✓"; }
+        catch (e) { copy.textContent = "Press Ctrl+C"; }
+        setTimeout(() => copy.textContent = "Copy link", 2000);
+      });
+      row.append(li, wa, copy);
+      share.appendChild(row);
+
+      side.append(apply, fit, share);
+      grid.append(main, side);
+      app.appendChild(grid);
+
+      // Dynamic canonical (one per job)
+      const canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      canonical.href = "https://careers-flow.github.io/job.html?id=" + encodeURIComponent(job.id);
+      document.head.appendChild(canonical);
+
+      // Dynamic OG tags
+      [
+        ["og:title", job.title + " at " + job.company + " | Careers Flow"],
+        ["og:description", job.summary],
+        ["og:url", canonical.href],
+        ["og:type", "website"]
+      ].forEach(([prop, content]) => {
+        const m = document.createElement("meta");
+        m.setAttribute("property", prop);
+        m.content = content;
+        document.head.appendChild(m);
+      });
+
+      // Structured data for Google Jobs-style rich results
+      const ld = document.createElement("script");
+      ld.type = "application/ld+json";
+      ld.textContent = JSON.stringify({
+        "@context": "https://schema.org", "@type": "JobPosting",
+        title: job.title, description: job.summary, datePosted: job.posted, validThrough: job.deadline,
+        employmentType: "FULL_TIME", hiringOrganization: { "@type": "Organization", name: job.company },
+        jobLocation: { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: job.location } }
+      });
+      document.head.appendChild(ld);
+    }
+  </script>
+</body>
+</html>
