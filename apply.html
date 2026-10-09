@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit Your Resume | Careers Flow</title>
+  <meta name="description" content="Apply once to be considered for current and upcoming shortlisted roles. Free for candidates.">
+  <link rel="canonical" href="https://careers-flow.github.io/apply.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } };</script>
+  <style>
+    .field { width: 100%; border: 1px solid #cbd5e1; border-radius: .6rem; padding: .7rem .9rem; background: #fff; font-size: 1rem; }
+    .field:focus { outline: 2px solid #10b981; outline-offset: 1px; border-color: #10b981; }
+    .field.bad { border-color: #ef4444; }
+    .hp { position: absolute; left: -9999px; height: 0; width: 0; overflow: hidden; }
+  </style>
+</head>
+<body class="font-sans text-slate-700 bg-slate-50 antialiased">
+
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-3xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-slate-900 text-lg">
+        <span class="inline-flex w-8 h-8 rounded-lg bg-emerald-500 text-white items-center justify-center text-sm">CF</span> Careers Flow
+      </a>
+      <a href="index.html" class="text-sm font-semibold text-slate-600 hover:text-emerald-600">← Back</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-5 py-10">
+    <h1 class="text-3xl font-extrabold text-slate-900">Submit your profile</h1>
+    <p id="forRole" class="mt-2 text-slate-600">Apply once to be considered for current and upcoming shortlisted roles.</p>
+    <p class="mt-1 text-sm text-slate-500">Takes about 3 minutes · Never any fee</p>
+
+    <!-- Progress -->
+    <div class="mt-8">
+      <div class="flex justify-between text-xs font-semibold text-slate-500">
+        <span id="stepLabel">Step 1 of 2 · About you</span><span id="stepPct">50%</span>
+      </div>
+      <div class="mt-2 h-2 bg-slate-200 rounded-full overflow-hidden"><div id="bar" class="h-full bg-emerald-500 transition-all" style="width:50%"></div></div>
+    </div>
+
+    <form id="form" class="mt-8 bg-white rounded-2xl border border-slate-200 p-6 md:p-8" novalidate>
+      <input type="hidden" name="job_id" id="job_id">
+      <input type="hidden" name="job_title" id="job_title">
+      <input type="hidden" name="submitted_at" id="submitted_at">
+      <div class="hp" aria-hidden="true"><label>Leave blank<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <!-- STEP 1 -->
+      <div data-step="1" class="space-y-5">
+        <div>
+          <label class="block text-sm font-semibold text-slate-900 mb-1" for="full_name">Full name *</label>
+          <input class="field" id="full_name" name="full_name" autocomplete="name" required>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-semibold text-slate-900 mb-1" for="email">Email *</label>
+            <input class="field" type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-900 mb-1" for="phone">Phone / WhatsApp *</label>
+            <input class="field" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+8801XXXXXXXXX" required>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-semibold text-slate-900 mb-1" for="current_role">Current / most recent role *</label>
+            <input class="field" id="current_role" name="current_role" required>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-900 mb-1" for="experience">Years of experience *</label>
+            <select class="field" id="experience" name="experience" required>
+              <option value="">Select</option><option>0–1</option><option>2–4</option><option>5–8</option><option>9–12</option><option>13+</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-semibold text-slate-900 mb-1" for="industry">Industry *</label>
+            <select class="field" id="industry" name="industry" required>
+              <option value="">Select</option><option>Pharmaceutical</option><option>Manufacturing</option><option>FMCG</option><option>IT / Software</option><option>Banking / Finance</option><option>Engineering</option><option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-900 mb-1" for="location">Current city *</label>
+            <input class="field" id="location" name="location" autocomplete="address-level2" required>
+          </div>
+        </div>
+        <p id="err1" class="hidden text-sm text-red-600 font-medium"></p>
+        <div class="flex justify-end">
+          <button type="button" id="next" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-7 py-3 rounded-lg">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div data-step="2" class="space-y-5 hidden">
+        <div>
+          <label class="block text-sm font-semibold text-slate-900 mb-1" for="resume">Resume (PDF, DOC, DOCX · max 5 MB) *</label>
+          <input class="field" type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+          <p id="fileInfo" class="mt-1 text-xs text-slate-500"></p>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-slate-900 mb-1" for="linkedin">LinkedIn URL <span class="font-normal text-slate-400">(optional)</span></label>
+          <input class="field" type="url" id="linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/...">
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-semibold text-slate-900 mb-1" for="notice">Notice period <span class="font-normal text-slate-400">(optional)</span></label>
+            <select class="field" id="notice" name="notice">
+              <option value="">Select</option><option>Immediately</option><option>15 days</option><option>30 days</option><option>60 days</option><option>90+ days</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-900 mb-1" for="salary">Expected salary <span class="font-normal text-slate-400">(optional)</span></label>
+            <input class="field" id="salary" name="expected_salary" placeholder="e.g. BDT 60,000 / month">
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-slate-900 mb-1" for="note">Anything else we should know? <span class="font-normal text-slate-400">(optional)</span></label>
+          <textarea class="field" id="note" name="note" rows="3" maxlength="500"></textarea>
+        </div>
+
+        <label class="flex gap-3 text-sm bg-slate-50 border border-slate-200 rounded-xl p-4 cursor-pointer">
+          <input type="checkbox" id="consent" name="consent" class="mt-1 accent-emerald-600" required>
+          <span>I agree that Careers Flow may share my resume and contact details with employers relevant to my profile, and I have read the <a href="privacy.html" target="_blank" class="text-emerald-700 font-semibold underline">Privacy Policy</a>. I can request deletion at any time by emailing <span id="consentMail" class="font-semibold"></span>. *</span>
+        </label>
+
+        <p id="err2" class="hidden text-sm text-red-600 font-medium"></p>
+        <div class="flex justify-between items-center">
+          <button type="button" id="back" class="text-slate-600 font-semibold px-4 py-3">← Back</button>
+          <button type="submit" id="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold px-7 py-3 rounded-lg">Submit application</button>
+        </div>
+        <p class="text-xs text-slate-500">Submitting does not guarantee selection or an interview. We never charge candidates.</p>
+      </div>
+    </form>
+
+    <!-- SUCCESS -->
+    <section id="success" class="hidden mt-8 bg-white rounded-2xl border border-emerald-200 p-8 text-center">
+      <div class="mx-auto w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl">✓</div>
+      <h2 class="mt-4 text-2xl font-extrabold text-slate-900">Application received</h2>
+      <p class="mt-2 text-slate-600">Thank you. Here is what happens next:</p>
+      <ol class="mt-4 text-left max-w-md mx-auto space-y-2 text-sm">
+        <li>1. We screen your profile against employer criteria.</li>
+        <li id="nextTime">2. Shortlisted candidates are contacted within 7 working days.</li>
+        <li>3. If you are shortlisted, we confirm with you before forwarding to the employer.</li>
+      </ol>
+      <p class="mt-5 text-xs text-slate-500">We cannot reply to every applicant, but we keep your profile on file for future matching. Never pay anyone claiming to be us.</p>
+      <a href="index.html#jobs" class="mt-6 inline-block bg-slate-900 text-white font-bold px-6 py-3 rounded-lg">Browse other roles</a>
+    </section>
+
+    <!-- Fallback if no endpoint configured -->
+    <section id="fallback" class="hidden mt-8 bg-amber-50 border border-amber-200 rounded-2xl p-6 text-sm">
+      <p class="font-semibold text-amber-900">Form endpoint not set yet</p>
+      <p class="mt-1 text-amber-800">Set <code>SITE.formEndpoint</code> in jobs.js, or use our hosted form instead:</p>
+      <a id="tallyLink" class="mt-3 inline-block bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-5 py-2.5 rounded-lg" target="_blank" rel="noopener" href="#">Open hosted application form</a>
+    </section>
+  </main>
+
+  <script src="jobs.js"></script>
+  <script>
+    const MAX_BYTES = 5 * 1024 * 1024;
+    const form = document.getElementById("form");
+    const $ = id => document.getElementById(id);
+
+    // Role context
+    const job = findJob(getParam("job"));
+    if (job) {
+      $("job_id").value = job.id;
+      $("job_title").value = job.title;
+      $("forRole").textContent = "Applying for: " + job.title + " · " + job.location;
+      document.title = "Apply: " + job.title + " | Careers Flow";
+    } else {
+      $("job_id").value = "general";
+      $("job_title").value = "General application";
+    }
+    $("consentMail").textContent = SITE.email;
+    $("nextTime").textContent = "2. Shortlisted candidates are contacted within " + SITE.responseTime + ".";
+    $("tallyLink").href = SITE.tallyUrl;
+
+    // Steps
+    function showStep(n) {
+      form.querySelectorAll("[data-step]").forEach(s => s.classList.toggle("hidden", s.dataset.step !== String(n)));
+      $("bar").style.width = (n * 50) + "%";
+      $("stepPct").textContent = (n * 50) + "%";
+      $("stepLabel").textContent = n === 1 ? "Step 1 of 2 · About you" : "Step 2 of 2 · Resume & consent";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    function validate(ids, errBox) {
+      let ok = true;
+      ids.forEach(id => {
+        const f = $(id);
+        const bad = f.type === "checkbox" ? !f.checked : !f.value.trim();
+        f.classList.toggle("bad", bad);
+        if (bad) ok = false;
+      });
+      if (ok && ids.includes("email") && !/^\S+@\S+\.\S+$/.test($("email").value)) { $("email").classList.add("bad"); ok = false; }
+      if (ok && ids.includes("phone") && $("phone").value.replace(/\D/g, "").length < 8) { $("phone").classList.add("bad"); ok = false; }
+      errBox.textContent = ok ? "" : "Please complete the highlighted fields.";
+      errBox.classList.toggle("hidden", ok);
+      return ok;
+    }
+    $("next").addEventListener("click", () => {
+      if (validate(["full_name","email","phone","current_role","experience","industry","location"], $("err1"))) showStep(2);
+    });
+    $("back").addEventListener("click", () => showStep(1));
+
+    // File check
+    $("resume").addEventListener("change", () => {
+      const f = $("resume").files[0];
+      const info = $("fileInfo");
+      if (!f) { info.textContent = ""; return; }
+      const okType = /\.(pdf|docx?)$/i.test(f.name);
+      if (!okType || f.size > MAX_BYTES) {
+        info.textContent = !okType ? "Please upload a PDF, DOC or DOCX file." : "File is larger than 5 MB.";
+        info.className = "mt-1 text-xs text-red-600";
+        $("resume").value = "";
+      } else {
+        info.textContent = f.name + " (" + (f.size / 1024).toFixed(0) + " KB)";
+        info.className = "mt-1 text-xs text-emerald-700";
+      }
+    });
+
+    // Submit
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      if (form.website.value) return; // honeypot: silently drop bots
+      const resumeOk = $("resume").files.length > 0;
+      $("resume").classList.toggle("bad", !resumeOk);
+      if (!validate(["consent"], $("err2")) || !resumeOk) {
+        $("err2").textContent = "Please attach your resume and tick the consent box.";
+        $("err2").classList.remove("hidden");
+        return;
+      }
+      if (!SITE.formEndpoint) { form.classList.add("hidden"); $("fallback").classList.remove("hidden"); return; }
+
+      $("submitted_at").value = new Date().toISOString();
+      const btn = $("submit");
+      btn.disabled = true; btn.textContent = "Submitting…";
+      try {
+        const res = await fetch(SITE.formEndpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        form.classList.add("hidden");
+        $("success").classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (err) {
+        btn.disabled = false; btn.textContent = "Submit application";
+        $("err2").textContent = "Something went wrong. Please try again, or email us at " + SITE.email + ".";
+        $("err2").classList.remove("hidden");
+      }
+    });
+  </script>
+</body>
+</html>
