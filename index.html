@@ -1,100 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers Flow | Professional Shortlisting & Talent Matching</title>
-    <!-- Tailwind CSS CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Careers Flow | Independent Talent Sourcing & Candidate Shortlisting</title>
+  <meta name="description" content="Careers Flow screens resumes against real employer requirements and forwards the best matches to hiring managers. Always free for candidates.">
+  <meta property="og:title" content="Careers Flow | Get your profile in front of hiring managers">
+  <meta property="og:description" content="We screen resumes against employer requirements and forward the best matches. Free for candidates.">
+  <meta property="og:type" content="website">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } };
+  </script>
+  <style>
+    .grad { background: radial-gradient(1200px 500px at 80% -10%, rgba(16,185,129,.18), transparent 60%), #0f172a; }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .chev { transform: rotate(180deg); }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="font-sans text-slate-700 bg-white antialiased">
 
-    <!-- Header / Navbar -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold text-blue-600 tracking-wide">Careers Flow</div>
-            <a href="#apply" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition text-sm">Submit Resume</a>
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 font-extrabold text-slate-900 text-lg">
+        <span class="inline-flex w-8 h-8 rounded-lg bg-emerald-500 text-white items-center justify-center text-sm">CF</span>
+        Careers Flow
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium">
+        <a href="#how" class="hover:text-emerald-600">How it works</a>
+        <a href="#jobs" class="hover:text-emerald-600">Open roles</a>
+        <a href="#employers" class="hover:text-emerald-600">For employers</a>
+        <a href="#faq" class="hover:text-emerald-600">FAQ</a>
+      </nav>
+      <a href="apply.html" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold px-4 py-2 rounded-lg">Submit Resume</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="grad text-white">
+    <div class="max-w-6xl mx-auto px-5 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="inline-block text-xs font-semibold tracking-wider uppercase text-emerald-300 bg-emerald-400/10 border border-emerald-400/30 rounded-full px-3 py-1">Independent talent sourcing</p>
+        <h1 class="mt-5 text-4xl md:text-5xl font-extrabold leading-tight">Get your profile in front of hiring managers, <span class="text-emerald-400">without the cold applications.</span></h1>
+        <p class="mt-5 text-lg text-slate-300 max-w-xl">We screen resumes against real employer requirements and forward the strongest matches directly to HR panels. Always free for candidates.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="apply.html" class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold px-7 py-3.5 rounded-lg">Submit Your Resume</a>
+          <a href="#jobs" class="border border-slate-600 hover:border-slate-400 font-semibold px-7 py-3.5 rounded-lg">Browse open roles</a>
         </div>
-    </header>
+        <p class="mt-4 text-sm text-slate-400">Takes about 3 minutes · Never any fee · Your data stays private</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
+        <p class="text-sm font-semibold text-slate-300">What happens after you apply</p>
+        <ol class="mt-5 space-y-5">
+          <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-full bg-emerald-500 text-slate-900 font-bold flex items-center justify-center">1</span><div><p class="font-semibold text-white">You submit once</p><p class="text-sm text-slate-400">One short form, one resume.</p></div></li>
+          <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-full bg-emerald-500 text-slate-900 font-bold flex items-center justify-center">2</span><div><p class="font-semibold text-white">We screen against criteria</p><p class="text-sm text-slate-400">Matched to the employer's stated requirements.</p></div></li>
+          <li class="flex gap-4"><span class="w-8 h-8 shrink-0 rounded-full bg-emerald-500 text-slate-900 font-bold flex items-center justify-center">3</span><div><p class="font-semibold text-white">Best matches go forward</p><p class="text-sm text-slate-400">Sent to the employer's HR panel with your consent.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="max-w-4xl mx-auto px-4 pt-16 pb-12 text-center">
-        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Independent Talent Sourcing</span>
-        <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 mt-4 leading-tight">
-            Streamlining Your Path to Leading Employers
-        </h1>
-        <p class="text-gray-600 text-base md:text-lg mt-4 max-w-2xl mx-auto">
-            At Careers Flow, we evaluate and shortlist qualified professionals to connect them efficiently with target recruiters and hiring authorities.
-        </p>
-    </section>
+  <!-- TRUST STRIP -->
+  <section class="border-b border-slate-200 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-5 py-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm font-semibold text-slate-700">
+      <div>✔ Free for candidates</div>
+      <div>✔ Consent before sharing</div>
+      <div>✔ Delete your data on request</div>
+      <div>✔ Real employer criteria</div>
+    </div>
+  </section>
 
-    <!-- Process & Disclosure Section -->
-    <section class="max-w-3xl mx-auto px-4 mb-12">
-        <div class="bg-white border border-gray-200 rounded-xl p-6 md:p-8 shadow-sm">
-            <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                How Careers Flow Works
-            </h2>
-            <div class="space-y-3 text-sm text-gray-600 leading-relaxed">
-                <p>
-                    <strong>1. Profile Submission:</strong> Candidates complete our unified application form with accurate professional history and documents.
-                </p>
-                <p>
-                    <strong>2. Independent Screening:</strong> Careers Flow conducts initial evaluations based strictly on requirements provided by partnering organizations.
-                </p>
-                <p>
-                    <strong>3. Direct Forwarding:</strong> Top-matching applicant files are aggregated and submitted to the employer's HR panel for formal processing.
-                </p>
-            </div>
+  <!-- HOW IT WORKS -->
+  <section id="how" class="py-20">
+    <div class="max-w-6xl mx-auto px-5">
+      <h2 class="text-3xl font-extrabold text-slate-900 text-center">How Careers Flow works</h2>
+      <p class="mt-3 text-center text-slate-500 max-w-2xl mx-auto">A simple, transparent process built around your time.</p>
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <div class="rounded-2xl border border-slate-200 p-7 hover:shadow-lg transition">
+          <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">1</div>
+          <h3 class="mt-4 font-bold text-slate-900 text-lg">Profile submission</h3>
+          <p class="mt-2 text-slate-600">Complete one unified application with your professional history and resume.</p>
         </div>
-    </section>
-
-    <!-- Application Form Container -->
-    <section id="apply" class="max-w-3xl mx-auto px-4 pb-16">
-        <div class="bg-white border border-gray-200 rounded-xl p-6 md:p-8 shadow-sm">
-            <h2 class="text-2xl font-bold text-gray-900 text-center mb-2">Candidate Application Form</h2>
-            <p class="text-sm text-gray-500 text-center mb-8">Submit your qualifications to be considered for current and upcoming shortlisted opportunities.</p>
-            
-            <!-- Replace this placeholder box with your Tally.so or Google Form Embed Code -->
-            <div class="w-full bg-gray-100 rounded-lg p-8 text-center text-gray-500 border-2 border-dashed border-gray-300">
-                <p class="font-medium text-gray-700 mb-2">[ Embed Your Form Here ]</p>
-                <p class="text-xs">Paste your Tally.so or Google Forms embed code inside this section.</p>
-            </div>
+        <div class="rounded-2xl border border-slate-200 p-7 hover:shadow-lg transition">
+          <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">2</div>
+          <h3 class="mt-4 font-bold text-slate-900 text-lg">Independent screening</h3>
+          <p class="mt-2 text-slate-600">We evaluate profiles strictly against requirements provided by partner organizations.</p>
         </div>
-    </section>
-
-    <!-- Terms & Legal Disclaimers -->
-    <section class="bg-gray-100 border-t border-gray-200 py-12">
-        <div class="max-w-4xl mx-auto px-4">
-            <h3 class="text-lg font-bold text-gray-900 mb-4">Terms & Legal Disclaimers</h3>
-            
-            <div class="space-y-4 text-xs text-gray-600 leading-relaxed">
-                <p>
-                    <strong>1. Independent Third-Party Role:</strong> Careers Flow acts strictly as an independent candidate screening and shortlisting platform. We do not issue job offers, conduct official hiring, or represent partner companies directly.
-                </p>
-                <p>
-                    <strong>2. Selection & Interview Responsibility:</strong> Application submission through Careers Flow does not guarantee selection, interview callbacks, or job placement. Shortlisting is subject entirely to initial criteria match.
-                </p>
-                <p>
-                    <strong>3. Final Employer Authority:</strong> All final recruitment decisions—including interview scheduling, skills assessment, employment terms, and hiring outcomes—rest solely with the respective employer. Careers Flow holds no liability for final employer choices.
-                </p>
-                <p>
-                    <strong>4. Data Usage Policy:</strong> Submitted candidate information is used exclusively for screening, profile verification, and referral transmission to relevant hiring organizations.
-                </p>
-            </div>
+        <div class="rounded-2xl border border-slate-200 p-7 hover:shadow-lg transition">
+          <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">3</div>
+          <h3 class="mt-4 font-bold text-slate-900 text-lg">Direct forwarding</h3>
+          <p class="mt-2 text-slate-600">Top-matching files are submitted to the employer's HR panel for formal processing.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-6 text-center text-xs text-gray-500">
-        <div class="max-w-6xl mx-auto px-4">
-            &copy; 2026 Careers Flow. All rights reserved.
+  <!-- OPEN ROLES -->
+  <section id="jobs" class="py-20 bg-slate-50 border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 class="text-3xl font-extrabold text-slate-900">Open roles</h2>
+          <p class="mt-2 text-slate-500">Roles we are currently shortlisting for.</p>
         </div>
-    </footer>
+        <div id="filters" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div id="jobList" class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <p id="noJobs" class="hidden mt-8 text-slate-500">No roles in this category right now. <a class="text-emerald-600 font-semibold" href="apply.html">Submit your profile</a> and we will contact you when one opens.</p>
+    </div>
+  </section>
 
+  <!-- EMPLOYERS -->
+  <section id="employers" class="py-20">
+    <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 class="text-3xl font-extrabold text-slate-900">Hiring? Receive pre-screened profiles.</h2>
+        <p class="mt-4 text-slate-600">Share your requirements and receive a focused shortlist instead of a pile of resumes. Start with a no-obligation pilot: three screened profiles for one open role.</p>
+        <ul class="mt-5 space-y-2 text-slate-700">
+          <li>✔ Screened against your stated criteria</li>
+          <li>✔ Candidate consent confirmed before sharing</li>
+          <li>✔ Clear written terms before any engagement</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl bg-slate-900 text-white p-8">
+        <p class="font-bold text-lg">Request a pilot shortlist</p>
+        <p class="mt-2 text-slate-300 text-sm">Tell us the role and key requirements. We reply within 2 working days.</p>
+        <a id="employerMail" href="#" class="mt-6 inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold px-6 py-3 rounded-lg">Email us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-3xl mx-auto px-5">
+      <h2 class="text-3xl font-extrabold text-slate-900 text-center">Frequently asked questions</h2>
+      <div class="mt-10 space-y-3">
+        <details class="bg-white rounded-xl border border-slate-200 p-5"><summary class="flex justify-between font-semibold text-slate-900">Is Careers Flow really free for candidates?<span class="chev transition">⌄</span></summary><p class="mt-3 text-slate-600">Yes. We never charge candidates and never ask for payment, deposits or "processing fees". If anyone asks you for money in our name, please report it to us.</p></details>
+        <details class="bg-white rounded-xl border border-slate-200 p-5"><summary class="flex justify-between font-semibold text-slate-900">Who will see my resume?<span class="chev transition">⌄</span></summary><p class="mt-3 text-slate-600">Only Careers Flow and the employers whose requirements you appear to match. We tell you before forwarding your profile, and you can withdraw consent at any time.</p></details>
+        <details class="bg-white rounded-xl border border-slate-200 p-5"><summary class="flex justify-between font-semibold text-slate-900">How long until I hear back?<span class="chev transition">⌄</span></summary><p id="faqTime" class="mt-3 text-slate-600"></p></details>
+        <details class="bg-white rounded-xl border border-slate-200 p-5"><summary class="flex justify-between font-semibold text-slate-900">Does applying guarantee an interview or job?<span class="chev transition">⌄</span></summary><p class="mt-3 text-slate-600">No. Shortlisting depends on how closely your profile matches the employer's criteria, and the employer alone decides on interviews and hiring.</p></details>
+        <details class="bg-white rounded-xl border border-slate-200 p-5"><summary class="flex justify-between font-semibold text-slate-900">How do I delete my data?<span class="chev transition">⌄</span></summary><p class="mt-3 text-slate-600">Email us from the address you applied with and we will delete your profile. See our <a class="text-emerald-600 font-semibold" href="privacy.html">Privacy Policy</a> for details.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-16 bg-emerald-500">
+    <div class="max-w-4xl mx-auto px-5 text-center">
+      <h2 class="text-3xl font-extrabold text-slate-900">Ready to be considered?</h2>
+      <p class="mt-2 text-slate-800">Submit once and be matched to current and upcoming roles.</p>
+      <a href="apply.html" class="mt-6 inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold px-8 py-3.5 rounded-lg">Submit Your Resume</a>
+    </div>
+  </section>
+
+  <!-- LEGAL + FOOTER -->
+  <footer class="bg-slate-900 text-slate-400">
+    <div class="max-w-6xl mx-auto px-5 py-14">
+      <h3 class="text-white font-bold">Terms & Legal Disclaimers</h3>
+      <div class="mt-4 grid md:grid-cols-2 gap-x-10 gap-y-3 text-sm leading-relaxed">
+        <p><strong class="text-slate-200">Independent third-party role.</strong> Careers Flow acts strictly as an independent candidate screening and shortlisting platform. We do not issue job offers, conduct official hiring, or represent partner companies directly.</p>
+        <p><strong class="text-slate-200">No guarantee.</strong> Submitting an application does not guarantee selection, interview callbacks or job placement. Shortlisting is subject to initial criteria match.</p>
+        <p><strong class="text-slate-200">Final employer authority.</strong> All final recruitment decisions, including interviews, assessments, employment terms and hiring outcomes, rest solely with the respective employer.</p>
+        <p><strong class="text-slate-200">No fees, ever.</strong> We do not charge candidates and never ask for payment. Your information is used only for screening, verification and referral to relevant hiring organizations, as described in our <a href="privacy.html" class="underline text-slate-200">Privacy Policy</a>.</p>
+      </div>
+      <div class="mt-10 pt-6 border-t border-slate-800 flex flex-wrap justify-between gap-3 text-sm">
+        <p>© 2026 Careers Flow. All rights reserved.</p>
+        <div class="flex gap-5"><a href="privacy.html" class="hover:text-white">Privacy</a><a id="footMail" href="#" class="hover:text-white">Contact</a><a id="footLi" href="#" class="hover:text-white" target="_blank" rel="noopener">LinkedIn</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="jobs.js"></script>
+  <script>
+    document.getElementById("faqTime").textContent = "Shortlisted candidates are contacted within " + SITE.responseTime + ". We cannot reply to every applicant, but we keep your profile on file for future matching.";
+    document.getElementById("employerMail").href = "mailto:" + SITE.email + "?subject=" + encodeURIComponent("Pilot shortlist request");
+    document.getElementById("footMail").href = "mailto:" + SITE.email;
+    document.getElementById("footLi").href = SITE.linkedin;
+
+    const industries = ["All", ...new Set(JOBS.map(j => j.industry))];
+    let active = "All";
+    const filters = document.getElementById("filters");
+    const list = document.getElementById("jobList");
+
+    function renderFilters() {
+      filters.replaceChildren();
+      industries.forEach(name => {
+        const b = el("button", "px-4 py-1.5 rounded-full text-sm font-semibold border " +
+          (name === active ? "bg-slate-900 text-white border-slate-900" : "bg-white text-slate-700 border-slate-300 hover:border-slate-500"), name);
+        b.addEventListener("click", () => { active = name; renderFilters(); renderJobs(); });
+        filters.appendChild(b);
+      });
+    }
+
+    function renderJobs() {
+      list.replaceChildren();
+      const items = JOBS.filter(j => active === "All" || j.industry === active);
+      document.getElementById("noJobs").classList.toggle("hidden", items.length > 0);
+      items.forEach(j => {
+        const card = el("a", "block bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg hover:border-emerald-300 transition");
+        card.href = "job.html?id=" + encodeURIComponent(j.id);
+        const left = daysLeft(j.deadline);
+        card.append(
+          el("p", "text-xs font-semibold text-emerald-700 uppercase tracking-wide", j.industry),
+          el("h3", "mt-2 font-bold text-slate-900 text-lg leading-snug", j.title),
+          el("p", "mt-1 text-sm text-slate-500", j.company),
+          el("p", "mt-4 text-sm text-slate-600", j.summary)
+        );
+        const tags = el("div", "mt-4 flex flex-wrap gap-2 text-xs font-medium");
+        [j.location, j.type, j.experience].forEach(t => tags.appendChild(el("span", "bg-slate-100 rounded-full px-3 py-1", t)));
+        card.appendChild(tags);
+        card.appendChild(el("p", "mt-5 text-sm font-semibold " + (left <= 7 ? "text-amber-600" : "text-slate-500"),
+          left > 0 ? "Closes in " + left + " day" + (left === 1 ? "" : "s") : "Closing soon"));
+        list.appendChild(card);
+      });
+    }
+    renderFilters(); renderJobs();
+  </script>
 </body>
 </html>
