@@ -9,7 +9,7 @@ const SITE = {
   name: "Careers Flow",
   email: "careersflows@gmail.com",
   linkedin: "https://www.linkedin.com/company/careers-flow",
-  uploadEndpoint: "https://script.google.com/macros/s/AKfycbxaD2kWYJ9yDW-Pv9atJH6f4mvqHnw-fHnQ-bS-M5QYIWZk8EEA8vubDN1G8gcWnEgJ2A/exec",
+  uploadEndpoint: "https://script.google.com/macros/s/AKfycbxaD2kWYJ9yDW-Pv9atJH6f4mvqHnw-fHnQ-bS-MSQYtWZk8EEA8vubDN1G8gcWnEgJ2A/exec",
   tallyUrl: "https://tally.so/r/your-form-id",
   responseTime: "7 working days"
 };
